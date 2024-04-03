@@ -1,20 +1,37 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const Register = () => {
 
   const {registerUser} = useContext(AuthContext)
+  const [error, setError] = useState('');
 
     const handleRegister = e => {
+
         e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
         
-        registerUser(email,password);
+        
+        if(password.length < 6){
+          setError('Password must be 6 characters long');
+          return;
+        }
+        if(password !== confirmPassword){
+          setError('password didnt match');
+          return;
+        }
+        if(!/\d{2}$/.test(password)){
+          setError('Password must have two numbers at the last')
+          return;
+        }
+        setError('');
 
+        registerUser(email,password)
+        alert('Registration Completed successfully');
     }
 
     return (
@@ -55,6 +72,7 @@ const Register = () => {
             <span className="label-text">Confirm Password</span>
           </label>
           <input type="password" name="confirmPassword" placeholder="Confirm Password" className="input input-bordered" required />
+          <p>{error && <small className="text-red-600">{error}</small>}</p>
         </div>
 
         <div className="form-control mt-6">

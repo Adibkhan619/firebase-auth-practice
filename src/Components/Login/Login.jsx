@@ -12,10 +12,8 @@ const Login = () => {
     // console.log(email, password);
 
     loginUser(email,password);
-
-
-
   };
+  
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
