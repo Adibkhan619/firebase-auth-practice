@@ -1,10 +1,9 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-
 const Register = () => {
 
-  const {registerUser} = useContext(AuthContext)
+  const {registerUser, setUser} = useContext(AuthContext)
   const [error, setError] = useState('');
 
     const handleRegister = e => {
@@ -31,6 +30,8 @@ const Register = () => {
         setError('');
 
         registerUser(email,password)
+        .then(result => {setUser(result.user)})
+        .catch(error => console.log('error paisi', error))
         alert('Registration Completed successfully');
     }
 
