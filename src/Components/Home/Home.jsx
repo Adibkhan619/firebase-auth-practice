@@ -4,10 +4,10 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Home = () => {
 
-    const user = useContext(AuthContext);
+    const  {authInfo}= useContext(AuthContext);
     return (
         <div>
-            <h1>{user}</h1>
+            <h1>{authInfo}</h1>
         </div>
     );
 };
